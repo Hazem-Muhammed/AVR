@@ -19,6 +19,6 @@
  * Keypad module 
  * 4 digits multiplexed seven-segment display 
 
-Those are implemented for the sake of different application layers.
+Those are implemented for the sake of different applications layer.
 
  
