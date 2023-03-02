@@ -17,15 +17,14 @@ int main(void)
 	ADC_voidInit();
 	ADC_voidEnable();
 	SET_GIE();
-	ADC_voidStartConversion();
 	lcd_init();
 	lcd_sendCmd(DisplayCursor);
 	u8 * welcome = (u8 *)"ADC VALUE IS:";
 	lcd_displyStr(welcome);
-	ADC_voidStartConversion();
 	
     while (1) 
     {
+		ADC_voidStartConversion();
 		u16 x = 0;
 		lcd_gotoRowColumn(0,0);
 		lcd_displyStr(welcome);
@@ -38,7 +37,6 @@ int main(void)
 		else
 			led_on(LED_GREEN);
 		lcd_gotoRowColumn(0,13);
-		ADC_voidStartConversion();
     }
 }
 

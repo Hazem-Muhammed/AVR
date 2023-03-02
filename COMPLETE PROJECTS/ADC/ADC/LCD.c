@@ -140,17 +140,25 @@ void lcd_init(void){
 
 void lcd_vidDisplyNum(u16 num)
 {
-	u8 num_to_char_array[100], iterator = 0;
-	while(num != 0)
+	if (num ==0)
 	{
-		num_to_char_array[iterator] = (u8)(num % 10);
-		num /= 10;
-		iterator++;
+		lcd_sendData('0');
 	}
-	for(;iterator > 0; iterator--)
+	else
 	{
-		lcd_sendData('0' + (num_to_char_array[iterator-1]));
+		u8 num_to_char_array[100], iterator = 0;
+		while(num != 0)
+		{
+			num_to_char_array[iterator] = (u8)(num % 10);
+			num /= 10;
+			iterator++;
+		}
+		for(;iterator > 0; iterator--)
+		{
+			lcd_sendData('0' + (num_to_char_array[iterator-1]));
+		}
 	}
+
 }
 
 /**********************************************************************************************************************

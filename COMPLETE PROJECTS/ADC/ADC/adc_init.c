@@ -148,8 +148,9 @@ u16 ADC_u16ReadADCInMV()
 	while( CHECK_BIT(ADCSRA , ADIF_BIT) == 0)
 	{
 	}
-	my_result = ADCH + (u8)256*ADCL ;
+	my_result = (u8)256*ADCL + ADCH  ;
 	SET_BIT( ADCSRA , ADIF_BIT);
+	CLEAR_BIT( ADCSRA , ADSC_BIT );
 	return my_result;
 	
 }

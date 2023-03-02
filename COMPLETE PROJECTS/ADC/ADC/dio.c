@@ -175,10 +175,28 @@ void dio_vidWriteChannel(dio_portId_t port, dio_channelId_t channel, dio_level_t
 					 mask  -> data mask
 * \Return value:   : None                            
 *******************************************************************************/
-void dio_vidWriteChannelGroup(dio_portId_t port,u8 value,u8 mask)
+void dio_vidWriteChannelGroup(dio_portId_t port,u8 value,u8 mask, u8 pos)
 {
-	/*	show me your code */
-	
+	switch (port)
+	{
+		case DIO_PORTA:
+		DIO_PORTA_REG &= ~mask ;
+		DIO_PORTA_REG |= (value<<pos)&mask ;
+		break;
+		
+		case DIO_PORTB:
+		DIO_PORTB_REG &= ~mask ;
+		DIO_PORTB_REG |= (value<<pos)&mask ;
+		break;
+		case DIO_PORTC:
+		DIO_PORTC_REG &= ~mask ;
+		DIO_PORTC_REG |= (value<<pos)&mask ;
+		break;
+		case DIO_PORTD:
+		DIO_PORTD_REG &= ~mask ;
+		DIO_PORTD_REG |= (value<<pos)&mask ;
+		break;
+	}	
 }
 
 /******************************************************************************
@@ -262,7 +280,28 @@ dio_level_t dio_dioLevelReadChannel(dio_portId_t port, dio_channelId_t channel)
 *******************************************************************************/
 void dio_vidEnablePullUp(dio_portId_t port, dio_channelId_t channel)
 {
-	/*	show me your code */	
+	switch (port)
+	{
+		case DIO_PORTA :
+		if(CHECK_BIT(DIO_DDRA_REG,channel) == 0)
+		SET_BIT(DIO_PORTA_REG,channel);
+		break;
+
+		case DIO_PORTB :
+		if(CHECK_BIT(DIO_DDRB_REG,channel) == 0)
+		SET_BIT(DIO_PORTB_REG,channel);
+		break;
+
+		case DIO_PORTC :
+		if(CHECK_BIT(DIO_DDRC_REG,channel) == 0)
+		SET_BIT(DIO_PORTC_REG,channel);
+		break;
+
+		case DIO_PORTD :
+		if(CHECK_BIT(DIO_DDRD_REG,channel) == 0)
+		SET_BIT(DIO_PORTD_REG,channel);
+		break;
+	}
 	
 }
 /**********************************************************************************************************************
