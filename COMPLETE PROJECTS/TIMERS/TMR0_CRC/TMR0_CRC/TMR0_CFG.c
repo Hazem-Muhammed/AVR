@@ -1,0 +1,69 @@
+/*
+ * TMR0_CFG.c
+ *
+ * Created: 2/26/2023 11:08:06 AM
+ *  Author: Lord
+ */ 
+// #include "dio_types.h"
+// #include "bit_math.h"
+// #include "dio_reg.h"
+// #include "std_types.h"
+
+#include "TMR0_CFG.h"
+
+void TIMER0_void_Config(void)
+{
+	#if(TIMER0_MODE == TIMER0_NORMAL)
+		CLEAR_BIT(TCCR0 , 6);
+		CLEAR_BIT(TCCR0 , 3);
+	#elif(TIMER0_MODE == TIMER0_CTC)
+		CLEAR_BIT(TCCR0 , 6);
+		SET_BIT(TCCR0 , 3);
+	#elif(TIMER0_MODE == TIMER0_FAST_PWM )
+		SET_BIT(TCCR0 , 6);
+		SET_BIT(TCCR0 , 3);
+	#elif(TIMER0_MODE == TIMER0_PHASE_PWM )
+		SET_BIT(TCCR0 , 6);
+		CLEAR_BIT(TCCR0 , 3);
+	#endif
+	
+	
+	
+	#if(TIMER0_PRESCALER == TIMER0_DIV_BY_1)
+		SET_BIT(TCCR0 , 0);
+		CLEAR_BIT(TCCR0 , 1);
+		CLEAR_BIT(TCCR0 , 2);
+	
+	#elif(TIMER0_PRESCALER == TIMER0_DIV_BY_8)
+		CLEAR_BIT(TCCR0 , 0);
+		SET_BIT(TCCR0 , 1);
+		CLEAR_BIT(TCCR0 , 2);
+	#elif(TIMER0_PRESCALER == TIMER0_DIV_BY_64 )
+		SET_BIT(TCCR0 , 0);
+		SET_BIT(TCCR0 , 1);
+		CLEAR_BIT(TCCR0 , 2);
+	#elif(TIMER0_PRESCALER == TIMER0_DIV_BY_256 )
+		CLEAR_BIT(TCCR0 , 0);
+		CLEAR_BIT(TCCR0 , 1);
+		SET_BIT(TCCR0 , 2);
+	#elif(TIMER0_PRESCALER == TIMER0_DIV_BY_1024 )
+		SET_BIT(TCCR0 , 0);
+		CLEAR_BIT(TCCR0 , 1);
+		SET_BIT(TCCR0 , 2);
+	#endif
+	
+	
+	#if(TIMER0_COM_EVENT == TIMER0_NO_ACTION)
+		CLEAR_BIT(TCCR0 , 4);
+		CLEAR_BIT(TCCR0 , 5);
+	#elif(TIMER0_COM_EVENT == TIMER0_TOGGLE)
+		SET_BIT(TCCR0 , 4)
+		CLEAR_BIT(TCCR0 , 5);
+	#elif(TIMER0_COM_EVENT == TIMER0_CLEAR )
+		CLEAR_BIT(TCCR0 , 4);
+		SET_BIT(TCCR0 , 5);
+	#elif(TIMER0_COM_EVENT == TIMER0_SET )
+		SET_BIT(TCCR0 , 4);
+		SET_BIT(TCCR0 , 5);
+	#endif
+}

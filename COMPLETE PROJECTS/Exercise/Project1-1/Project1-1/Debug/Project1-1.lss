@@ -1,0 +1,1375 @@
+
+Project1-1.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000764  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000008  00800060  00000764  000007d8  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  000007e0  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000810  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000150  00000000  00000000  0000084c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00001b38  00000000  00000000  0000099c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000a71  00000000  00000000  000024d4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000b40  00000000  00000000  00002f45  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000220  00000000  00000000  00003a88  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000006e2  00000000  00000000  00003ca8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000b7b  00000000  00000000  0000438a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000110  00000000  00000000  00004f05  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   8:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  10:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  14:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  18:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  1c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  20:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  24:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  28:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  2c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  30:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  34:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  38:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  3c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  40:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  44:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  48:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  4c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  50:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	e4 e6       	ldi	r30, 0x64	; 100
+  68:	f7 e0       	ldi	r31, 0x07	; 7
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	a8 36       	cpi	r26, 0x68	; 104
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+  76:	0e 94 a7 02 	call	0x54e	; 0x54e <main>
+  7a:	0c 94 b0 03 	jmp	0x760	; 0x760 <_exit>
+
+0000007e <__bad_interrupt>:
+  7e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000082 <button_vidInit>:
+* \Parameters (in) : None                                                                            
+* \Return value:   : None                                
+*******************************************************************************/
+void button_vidInit(void)
+{
+	dio_vidConfigChannel(BUTTON0_PORT,BUTTON0_PIN,INPUT);
+  82:	40 e0       	ldi	r20, 0x00	; 0
+  84:	67 e0       	ldi	r22, 0x07	; 7
+  86:	83 e0       	ldi	r24, 0x03	; 3
+  88:	0e 94 36 01 	call	0x26c	; 0x26c <dio_vidConfigChannel>
+	dio_vidConfigChannel(BUTTON1_PORT,BUTTON1_PIN,INPUT);
+  8c:	40 e0       	ldi	r20, 0x00	; 0
+  8e:	66 e0       	ldi	r22, 0x06	; 6
+  90:	83 e0       	ldi	r24, 0x03	; 3
+  92:	0e 94 36 01 	call	0x26c	; 0x26c <dio_vidConfigChannel>
+	dio_vidConfigChannel(BUTTON2_PORT,BUTTON2_PIN,INPUT);
+  96:	40 e0       	ldi	r20, 0x00	; 0
+  98:	65 e0       	ldi	r22, 0x05	; 5
+  9a:	83 e0       	ldi	r24, 0x03	; 3
+  9c:	0e 94 36 01 	call	0x26c	; 0x26c <dio_vidConfigChannel>
+	dio_vidConfigChannel(BUTTON3_PORT,BUTTON3_PIN,INPUT);
+  a0:	40 e0       	ldi	r20, 0x00	; 0
+  a2:	63 e0       	ldi	r22, 0x03	; 3
+  a4:	83 e0       	ldi	r24, 0x03	; 3
+  a6:	0e 94 36 01 	call	0x26c	; 0x26c <dio_vidConfigChannel>
+  aa:	08 95       	ret
+
+000000ac <Button_GetStatus>:
+*                                     RELEASED                                  
+*******************************************************************************/
+button_status_t Button_GetStatus(button_id_t button)
+{
+	button_status_t status = RELEASED;
+	switch (button)
+  ac:	81 30       	cpi	r24, 0x01	; 1
+  ae:	71 f0       	breq	.+28     	; 0xcc <Button_GetStatus+0x20>
+  b0:	28 f0       	brcs	.+10     	; 0xbc <Button_GetStatus+0x10>
+  b2:	82 30       	cpi	r24, 0x02	; 2
+  b4:	99 f0       	breq	.+38     	; 0xdc <Button_GetStatus+0x30>
+  b6:	83 30       	cpi	r24, 0x03	; 3
+  b8:	c9 f0       	breq	.+50     	; 0xec <Button_GetStatus+0x40>
+  ba:	20 c0       	rjmp	.+64     	; 0xfc <Button_GetStatus+0x50>
+			status = RELEASED;
+		}
+
+#else
+		/*	PULL UP	*/
+		if (dio_dioLevelReadChannel(BUTTON0_PORT,BUTTON0_PIN) == STD_LOW)
+  bc:	67 e0       	ldi	r22, 0x07	; 7
+  be:	83 e0       	ldi	r24, 0x03	; 3
+  c0:	0e 94 10 02 	call	0x420	; 0x420 <dio_dioLevelReadChannel>
+  c4:	81 11       	cpse	r24, r1
+  c6:	1c c0       	rjmp	.+56     	; 0x100 <Button_GetStatus+0x54>
+		{
+			status = PRESSED;
+  c8:	81 e0       	ldi	r24, 0x01	; 1
+  ca:	08 95       	ret
+			status = RELEASED;
+		}
+
+#else
+		/*	PULL UP	*/
+		if (dio_dioLevelReadChannel(BUTTON1_PORT,BUTTON1_PIN) == STD_LOW)
+  cc:	66 e0       	ldi	r22, 0x06	; 6
+  ce:	83 e0       	ldi	r24, 0x03	; 3
+  d0:	0e 94 10 02 	call	0x420	; 0x420 <dio_dioLevelReadChannel>
+  d4:	81 11       	cpse	r24, r1
+  d6:	16 c0       	rjmp	.+44     	; 0x104 <Button_GetStatus+0x58>
+		{
+			status = PRESSED;
+  d8:	81 e0       	ldi	r24, 0x01	; 1
+  da:	08 95       	ret
+			status = RELEASED;
+		}
+
+#else
+		/*	PULL UP	*/
+		if (dio_dioLevelReadChannel(BUTTON2_PORT,BUTTON2_PIN) == STD_LOW)
+  dc:	65 e0       	ldi	r22, 0x05	; 5
+  de:	83 e0       	ldi	r24, 0x03	; 3
+  e0:	0e 94 10 02 	call	0x420	; 0x420 <dio_dioLevelReadChannel>
+  e4:	81 11       	cpse	r24, r1
+  e6:	10 c0       	rjmp	.+32     	; 0x108 <Button_GetStatus+0x5c>
+		{
+			status = PRESSED;
+  e8:	81 e0       	ldi	r24, 0x01	; 1
+  ea:	08 95       	ret
+		status = RELEASED;
+	}
+
+	#else
+	/*	PULL UP	*/
+	if (dio_dioLevelReadChannel(BUTTON3_PORT,BUTTON3_PIN) == STD_LOW)
+  ec:	63 e0       	ldi	r22, 0x03	; 3
+  ee:	83 e0       	ldi	r24, 0x03	; 3
+  f0:	0e 94 10 02 	call	0x420	; 0x420 <dio_dioLevelReadChannel>
+  f4:	81 11       	cpse	r24, r1
+  f6:	0a c0       	rjmp	.+20     	; 0x10c <Button_GetStatus+0x60>
+	{
+		status = PRESSED;
+  f8:	81 e0       	ldi	r24, 0x01	; 1
+  fa:	08 95       	ret
+* \Return value:   : button_status_t  PRESSED
+*                                     RELEASED                                  
+*******************************************************************************/
+button_status_t Button_GetStatus(button_id_t button)
+{
+	button_status_t status = RELEASED;
+  fc:	80 e0       	ldi	r24, 0x00	; 0
+  fe:	08 95       	ret
+		{
+			status = PRESSED;
+		}
+		else
+		{
+			status = RELEASED;
+ 100:	80 e0       	ldi	r24, 0x00	; 0
+ 102:	08 95       	ret
+		{
+			status = PRESSED;
+		}
+		else
+		{
+			status = RELEASED;
+ 104:	80 e0       	ldi	r24, 0x00	; 0
+ 106:	08 95       	ret
+		{
+			status = PRESSED;
+		}
+		else
+		{
+			status = RELEASED;
+ 108:	80 e0       	ldi	r24, 0x00	; 0
+ 10a:	08 95       	ret
+	{
+		status = PRESSED;
+	}
+	else
+	{
+		status = RELEASED;
+ 10c:	80 e0       	ldi	r24, 0x00	; 0
+	}
+	#endif
+	break;
+	}
+	return status;
+}
+ 10e:	08 95       	ret
+
+00000110 <buzzer_init>:
+
+void buzzer_start_tune()
+{
+	dio_vidWriteChannel(BUZZER_PORT,BUZZER_PIN,STD_HIGH);
+	_delay_ms(700);
+	dio_vidWriteChannel(BUZZER_PORT,BUZZER_PIN,STD_LOW);
+ 110:	41 e0       	ldi	r20, 0x01	; 1
+ 112:	66 e0       	ldi	r22, 0x06	; 6
+ 114:	82 e0       	ldi	r24, 0x02	; 2
+ 116:	0e 94 36 01 	call	0x26c	; 0x26c <dio_vidConfigChannel>
+ 11a:	40 e0       	ldi	r20, 0x00	; 0
+ 11c:	66 e0       	ldi	r22, 0x06	; 6
+ 11e:	82 e0       	ldi	r24, 0x02	; 2
+ 120:	0e 94 a3 01 	call	0x346	; 0x346 <dio_vidWriteChannel>
+ 124:	08 95       	ret
+
+00000126 <buzzer_correct_password_tune>:
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 126:	2f ef       	ldi	r18, 0xFF	; 255
+ 128:	86 e1       	ldi	r24, 0x16	; 22
+ 12a:	91 e1       	ldi	r25, 0x11	; 17
+ 12c:	21 50       	subi	r18, 0x01	; 1
+ 12e:	80 40       	sbci	r24, 0x00	; 0
+ 130:	90 40       	sbci	r25, 0x00	; 0
+ 132:	e1 f7       	brne	.-8      	; 0x12c <buzzer_correct_password_tune+0x6>
+ 134:	00 c0       	rjmp	.+0      	; 0x136 <buzzer_correct_password_tune+0x10>
+ 136:	00 00       	nop
+}
+
+void buzzer_correct_password_tune()
+{
+	_delay_ms(700);
+	dio_vidWriteChannel(BUZZER_PORT,BUZZER_PIN,STD_HIGH);
+ 138:	41 e0       	ldi	r20, 0x01	; 1
+ 13a:	66 e0       	ldi	r22, 0x06	; 6
+ 13c:	82 e0       	ldi	r24, 0x02	; 2
+ 13e:	0e 94 a3 01 	call	0x346	; 0x346 <dio_vidWriteChannel>
+ 142:	2f ef       	ldi	r18, 0xFF	; 255
+ 144:	86 e1       	ldi	r24, 0x16	; 22
+ 146:	91 e1       	ldi	r25, 0x11	; 17
+ 148:	21 50       	subi	r18, 0x01	; 1
+ 14a:	80 40       	sbci	r24, 0x00	; 0
+ 14c:	90 40       	sbci	r25, 0x00	; 0
+ 14e:	e1 f7       	brne	.-8      	; 0x148 <buzzer_correct_password_tune+0x22>
+ 150:	00 c0       	rjmp	.+0      	; 0x152 <buzzer_correct_password_tune+0x2c>
+ 152:	00 00       	nop
+	_delay_ms(700);
+	dio_vidWriteChannel(BUZZER_PORT,BUZZER_PIN,STD_LOW);
+ 154:	40 e0       	ldi	r20, 0x00	; 0
+ 156:	66 e0       	ldi	r22, 0x06	; 6
+ 158:	82 e0       	ldi	r24, 0x02	; 2
+ 15a:	0e 94 a3 01 	call	0x346	; 0x346 <dio_vidWriteChannel>
+ 15e:	2f ef       	ldi	r18, 0xFF	; 255
+ 160:	83 ec       	ldi	r24, 0xC3	; 195
+ 162:	99 e0       	ldi	r25, 0x09	; 9
+ 164:	21 50       	subi	r18, 0x01	; 1
+ 166:	80 40       	sbci	r24, 0x00	; 0
+ 168:	90 40       	sbci	r25, 0x00	; 0
+ 16a:	e1 f7       	brne	.-8      	; 0x164 <buzzer_correct_password_tune+0x3e>
+ 16c:	00 c0       	rjmp	.+0      	; 0x16e <buzzer_correct_password_tune+0x48>
+ 16e:	00 00       	nop
+	_delay_ms(400);
+	
+	dio_vidWriteChannel(BUZZER_PORT,BUZZER_PIN,STD_HIGH);
+ 170:	41 e0       	ldi	r20, 0x01	; 1
+ 172:	66 e0       	ldi	r22, 0x06	; 6
+ 174:	82 e0       	ldi	r24, 0x02	; 2
+ 176:	0e 94 a3 01 	call	0x346	; 0x346 <dio_vidWriteChannel>
+ 17a:	2f ef       	ldi	r18, 0xFF	; 255
+ 17c:	86 e1       	ldi	r24, 0x16	; 22
+ 17e:	91 e1       	ldi	r25, 0x11	; 17
+ 180:	21 50       	subi	r18, 0x01	; 1
+ 182:	80 40       	sbci	r24, 0x00	; 0
+ 184:	90 40       	sbci	r25, 0x00	; 0
+ 186:	e1 f7       	brne	.-8      	; 0x180 <buzzer_correct_password_tune+0x5a>
+ 188:	00 c0       	rjmp	.+0      	; 0x18a <buzzer_correct_password_tune+0x64>
+ 18a:	00 00       	nop
+	_delay_ms(700);
+	dio_vidWriteChannel(BUZZER_PORT,BUZZER_PIN,STD_LOW);
+ 18c:	40 e0       	ldi	r20, 0x00	; 0
+ 18e:	66 e0       	ldi	r22, 0x06	; 6
+ 190:	82 e0       	ldi	r24, 0x02	; 2
+ 192:	0e 94 a3 01 	call	0x346	; 0x346 <dio_vidWriteChannel>
+ 196:	2f ef       	ldi	r18, 0xFF	; 255
+ 198:	83 ec       	ldi	r24, 0xC3	; 195
+ 19a:	99 e0       	ldi	r25, 0x09	; 9
+ 19c:	21 50       	subi	r18, 0x01	; 1
+ 19e:	80 40       	sbci	r24, 0x00	; 0
+ 1a0:	90 40       	sbci	r25, 0x00	; 0
+ 1a2:	e1 f7       	brne	.-8      	; 0x19c <buzzer_correct_password_tune+0x76>
+ 1a4:	00 c0       	rjmp	.+0      	; 0x1a6 <buzzer_correct_password_tune+0x80>
+ 1a6:	00 00       	nop
+	_delay_ms(400);
+		
+	dio_vidWriteChannel(BUZZER_PORT,BUZZER_PIN,STD_HIGH);
+ 1a8:	41 e0       	ldi	r20, 0x01	; 1
+ 1aa:	66 e0       	ldi	r22, 0x06	; 6
+ 1ac:	82 e0       	ldi	r24, 0x02	; 2
+ 1ae:	0e 94 a3 01 	call	0x346	; 0x346 <dio_vidWriteChannel>
+ 1b2:	2f ef       	ldi	r18, 0xFF	; 255
+ 1b4:	86 e1       	ldi	r24, 0x16	; 22
+ 1b6:	91 e1       	ldi	r25, 0x11	; 17
+ 1b8:	21 50       	subi	r18, 0x01	; 1
+ 1ba:	80 40       	sbci	r24, 0x00	; 0
+ 1bc:	90 40       	sbci	r25, 0x00	; 0
+ 1be:	e1 f7       	brne	.-8      	; 0x1b8 <buzzer_correct_password_tune+0x92>
+ 1c0:	00 c0       	rjmp	.+0      	; 0x1c2 <buzzer_correct_password_tune+0x9c>
+ 1c2:	00 00       	nop
+	_delay_ms(700);
+	dio_vidWriteChannel(BUZZER_PORT,BUZZER_PIN,STD_LOW);
+ 1c4:	40 e0       	ldi	r20, 0x00	; 0
+ 1c6:	66 e0       	ldi	r22, 0x06	; 6
+ 1c8:	82 e0       	ldi	r24, 0x02	; 2
+ 1ca:	0e 94 a3 01 	call	0x346	; 0x346 <dio_vidWriteChannel>
+ 1ce:	2f ef       	ldi	r18, 0xFF	; 255
+ 1d0:	83 ec       	ldi	r24, 0xC3	; 195
+ 1d2:	99 e0       	ldi	r25, 0x09	; 9
+ 1d4:	21 50       	subi	r18, 0x01	; 1
+ 1d6:	80 40       	sbci	r24, 0x00	; 0
+ 1d8:	90 40       	sbci	r25, 0x00	; 0
+ 1da:	e1 f7       	brne	.-8      	; 0x1d4 <buzzer_correct_password_tune+0xae>
+ 1dc:	00 c0       	rjmp	.+0      	; 0x1de <buzzer_correct_password_tune+0xb8>
+ 1de:	00 00       	nop
+ 1e0:	08 95       	ret
+
+000001e2 <buzzer_wrong_password_tune>:
+	
+}
+
+
+void buzzer_wrong_password_tune()
+{
+ 1e2:	cf 93       	push	r28
+ 1e4:	df 93       	push	r29
+	for(int i=0 ; i<10 ; i++)
+ 1e6:	c0 e0       	ldi	r28, 0x00	; 0
+ 1e8:	d0 e0       	ldi	r29, 0x00	; 0
+ 1ea:	26 c0       	rjmp	.+76     	; 0x238 <buzzer_wrong_password_tune+0x56>
+ 1ec:	2f ef       	ldi	r18, 0xFF	; 255
+ 1ee:	82 e5       	ldi	r24, 0x52	; 82
+ 1f0:	97 e0       	ldi	r25, 0x07	; 7
+ 1f2:	21 50       	subi	r18, 0x01	; 1
+ 1f4:	80 40       	sbci	r24, 0x00	; 0
+ 1f6:	90 40       	sbci	r25, 0x00	; 0
+ 1f8:	e1 f7       	brne	.-8      	; 0x1f2 <buzzer_wrong_password_tune+0x10>
+ 1fa:	00 c0       	rjmp	.+0      	; 0x1fc <buzzer_wrong_password_tune+0x1a>
+ 1fc:	00 00       	nop
+	{
+			_delay_ms(300);
+			dio_vidWriteChannel(BUZZER_PORT,BUZZER_PIN,STD_HIGH);
+ 1fe:	41 e0       	ldi	r20, 0x01	; 1
+ 200:	66 e0       	ldi	r22, 0x06	; 6
+ 202:	82 e0       	ldi	r24, 0x02	; 2
+ 204:	0e 94 a3 01 	call	0x346	; 0x346 <dio_vidWriteChannel>
+ 208:	2f ef       	ldi	r18, 0xFF	; 255
+ 20a:	82 e5       	ldi	r24, 0x52	; 82
+ 20c:	97 e0       	ldi	r25, 0x07	; 7
+ 20e:	21 50       	subi	r18, 0x01	; 1
+ 210:	80 40       	sbci	r24, 0x00	; 0
+ 212:	90 40       	sbci	r25, 0x00	; 0
+ 214:	e1 f7       	brne	.-8      	; 0x20e <buzzer_wrong_password_tune+0x2c>
+ 216:	00 c0       	rjmp	.+0      	; 0x218 <buzzer_wrong_password_tune+0x36>
+ 218:	00 00       	nop
+			_delay_ms(300);
+			dio_vidWriteChannel(BUZZER_PORT,BUZZER_PIN,STD_LOW);
+ 21a:	40 e0       	ldi	r20, 0x00	; 0
+ 21c:	66 e0       	ldi	r22, 0x06	; 6
+ 21e:	82 e0       	ldi	r24, 0x02	; 2
+ 220:	0e 94 a3 01 	call	0x346	; 0x346 <dio_vidWriteChannel>
+ 224:	2f ef       	ldi	r18, 0xFF	; 255
+ 226:	82 e5       	ldi	r24, 0x52	; 82
+ 228:	97 e0       	ldi	r25, 0x07	; 7
+ 22a:	21 50       	subi	r18, 0x01	; 1
+ 22c:	80 40       	sbci	r24, 0x00	; 0
+ 22e:	90 40       	sbci	r25, 0x00	; 0
+ 230:	e1 f7       	brne	.-8      	; 0x22a <buzzer_wrong_password_tune+0x48>
+ 232:	00 c0       	rjmp	.+0      	; 0x234 <buzzer_wrong_password_tune+0x52>
+ 234:	00 00       	nop
+}
+
+
+void buzzer_wrong_password_tune()
+{
+	for(int i=0 ; i<10 ; i++)
+ 236:	21 96       	adiw	r28, 0x01	; 1
+ 238:	ca 30       	cpi	r28, 0x0A	; 10
+ 23a:	d1 05       	cpc	r29, r1
+ 23c:	bc f2       	brlt	.-82     	; 0x1ec <buzzer_wrong_password_tune+0xa>
+			dio_vidWriteChannel(BUZZER_PORT,BUZZER_PIN,STD_HIGH);
+			_delay_ms(300);
+			dio_vidWriteChannel(BUZZER_PORT,BUZZER_PIN,STD_LOW);
+			_delay_ms(300);
+	}
+}
+ 23e:	df 91       	pop	r29
+ 240:	cf 91       	pop	r28
+ 242:	08 95       	ret
+
+00000244 <buzzer_entry_tune>:
+
+
+void buzzer_entry_tune()
+{
+		dio_vidWriteChannel(BUZZER_PORT,BUZZER_PIN,STD_HIGH);
+ 244:	41 e0       	ldi	r20, 0x01	; 1
+ 246:	66 e0       	ldi	r22, 0x06	; 6
+ 248:	82 e0       	ldi	r24, 0x02	; 2
+ 24a:	0e 94 a3 01 	call	0x346	; 0x346 <dio_vidWriteChannel>
+ 24e:	2f e7       	ldi	r18, 0x7F	; 127
+ 250:	8b e8       	ldi	r24, 0x8B	; 139
+ 252:	98 e0       	ldi	r25, 0x08	; 8
+ 254:	21 50       	subi	r18, 0x01	; 1
+ 256:	80 40       	sbci	r24, 0x00	; 0
+ 258:	90 40       	sbci	r25, 0x00	; 0
+ 25a:	e1 f7       	brne	.-8      	; 0x254 <buzzer_entry_tune+0x10>
+ 25c:	00 c0       	rjmp	.+0      	; 0x25e <buzzer_entry_tune+0x1a>
+ 25e:	00 00       	nop
+		_delay_ms(350);
+		dio_vidWriteChannel(BUZZER_PORT,BUZZER_PIN,STD_LOW);
+ 260:	40 e0       	ldi	r20, 0x00	; 0
+ 262:	66 e0       	ldi	r22, 0x06	; 6
+ 264:	82 e0       	ldi	r24, 0x02	; 2
+ 266:	0e 94 a3 01 	call	0x346	; 0x346 <dio_vidWriteChannel>
+ 26a:	08 95       	ret
+
+0000026c <dio_vidConfigChannel>:
+	case DIO_PORTC:
+		FLIP_BIT(DIO_PORTC_REG,channel);
+		break;
+
+	case DIO_PORTD:
+		FLIP_BIT(DIO_PORTD_REG,channel);
+ 26c:	81 30       	cpi	r24, 0x01	; 1
+ 26e:	01 f1       	breq	.+64     	; 0x2b0 <dio_vidConfigChannel+0x44>
+ 270:	30 f0       	brcs	.+12     	; 0x27e <dio_vidConfigChannel+0x12>
+ 272:	82 30       	cpi	r24, 0x02	; 2
+ 274:	b1 f1       	breq	.+108    	; 0x2e2 <dio_vidConfigChannel+0x76>
+ 276:	83 30       	cpi	r24, 0x03	; 3
+ 278:	09 f4       	brne	.+2      	; 0x27c <dio_vidConfigChannel+0x10>
+ 27a:	4c c0       	rjmp	.+152    	; 0x314 <dio_vidConfigChannel+0xa8>
+ 27c:	08 95       	ret
+ 27e:	41 30       	cpi	r20, 0x01	; 1
+ 280:	59 f4       	brne	.+22     	; 0x298 <dio_vidConfigChannel+0x2c>
+ 282:	2a b3       	in	r18, 0x1a	; 26
+ 284:	81 e0       	ldi	r24, 0x01	; 1
+ 286:	90 e0       	ldi	r25, 0x00	; 0
+ 288:	02 c0       	rjmp	.+4      	; 0x28e <dio_vidConfigChannel+0x22>
+ 28a:	88 0f       	add	r24, r24
+ 28c:	99 1f       	adc	r25, r25
+ 28e:	6a 95       	dec	r22
+ 290:	e2 f7       	brpl	.-8      	; 0x28a <dio_vidConfigChannel+0x1e>
+ 292:	82 2b       	or	r24, r18
+ 294:	8a bb       	out	0x1a, r24	; 26
+ 296:	08 95       	ret
+ 298:	2a b3       	in	r18, 0x1a	; 26
+ 29a:	81 e0       	ldi	r24, 0x01	; 1
+ 29c:	90 e0       	ldi	r25, 0x00	; 0
+ 29e:	02 c0       	rjmp	.+4      	; 0x2a4 <dio_vidConfigChannel+0x38>
+ 2a0:	88 0f       	add	r24, r24
+ 2a2:	99 1f       	adc	r25, r25
+ 2a4:	6a 95       	dec	r22
+ 2a6:	e2 f7       	brpl	.-8      	; 0x2a0 <dio_vidConfigChannel+0x34>
+ 2a8:	80 95       	com	r24
+ 2aa:	82 23       	and	r24, r18
+ 2ac:	8a bb       	out	0x1a, r24	; 26
+ 2ae:	08 95       	ret
+ 2b0:	41 30       	cpi	r20, 0x01	; 1
+ 2b2:	59 f4       	brne	.+22     	; 0x2ca <dio_vidConfigChannel+0x5e>
+ 2b4:	27 b3       	in	r18, 0x17	; 23
+ 2b6:	81 e0       	ldi	r24, 0x01	; 1
+ 2b8:	90 e0       	ldi	r25, 0x00	; 0
+ 2ba:	02 c0       	rjmp	.+4      	; 0x2c0 <dio_vidConfigChannel+0x54>
+ 2bc:	88 0f       	add	r24, r24
+ 2be:	99 1f       	adc	r25, r25
+ 2c0:	6a 95       	dec	r22
+ 2c2:	e2 f7       	brpl	.-8      	; 0x2bc <dio_vidConfigChannel+0x50>
+ 2c4:	82 2b       	or	r24, r18
+ 2c6:	87 bb       	out	0x17, r24	; 23
+ 2c8:	08 95       	ret
+ 2ca:	27 b3       	in	r18, 0x17	; 23
+ 2cc:	81 e0       	ldi	r24, 0x01	; 1
+ 2ce:	90 e0       	ldi	r25, 0x00	; 0
+ 2d0:	02 c0       	rjmp	.+4      	; 0x2d6 <dio_vidConfigChannel+0x6a>
+ 2d2:	88 0f       	add	r24, r24
+ 2d4:	99 1f       	adc	r25, r25
+ 2d6:	6a 95       	dec	r22
+ 2d8:	e2 f7       	brpl	.-8      	; 0x2d2 <dio_vidConfigChannel+0x66>
+ 2da:	80 95       	com	r24
+ 2dc:	82 23       	and	r24, r18
+ 2de:	87 bb       	out	0x17, r24	; 23
+ 2e0:	08 95       	ret
+ 2e2:	41 30       	cpi	r20, 0x01	; 1
+ 2e4:	59 f4       	brne	.+22     	; 0x2fc <dio_vidConfigChannel+0x90>
+ 2e6:	24 b3       	in	r18, 0x14	; 20
+ 2e8:	81 e0       	ldi	r24, 0x01	; 1
+ 2ea:	90 e0       	ldi	r25, 0x00	; 0
+ 2ec:	02 c0       	rjmp	.+4      	; 0x2f2 <dio_vidConfigChannel+0x86>
+ 2ee:	88 0f       	add	r24, r24
+ 2f0:	99 1f       	adc	r25, r25
+ 2f2:	6a 95       	dec	r22
+ 2f4:	e2 f7       	brpl	.-8      	; 0x2ee <dio_vidConfigChannel+0x82>
+ 2f6:	82 2b       	or	r24, r18
+ 2f8:	84 bb       	out	0x14, r24	; 20
+ 2fa:	08 95       	ret
+ 2fc:	24 b3       	in	r18, 0x14	; 20
+ 2fe:	81 e0       	ldi	r24, 0x01	; 1
+ 300:	90 e0       	ldi	r25, 0x00	; 0
+ 302:	02 c0       	rjmp	.+4      	; 0x308 <dio_vidConfigChannel+0x9c>
+ 304:	88 0f       	add	r24, r24
+ 306:	99 1f       	adc	r25, r25
+ 308:	6a 95       	dec	r22
+ 30a:	e2 f7       	brpl	.-8      	; 0x304 <dio_vidConfigChannel+0x98>
+ 30c:	80 95       	com	r24
+ 30e:	82 23       	and	r24, r18
+ 310:	84 bb       	out	0x14, r24	; 20
+ 312:	08 95       	ret
+ 314:	41 30       	cpi	r20, 0x01	; 1
+ 316:	59 f4       	brne	.+22     	; 0x32e <dio_vidConfigChannel+0xc2>
+ 318:	21 b3       	in	r18, 0x11	; 17
+ 31a:	81 e0       	ldi	r24, 0x01	; 1
+ 31c:	90 e0       	ldi	r25, 0x00	; 0
+ 31e:	02 c0       	rjmp	.+4      	; 0x324 <dio_vidConfigChannel+0xb8>
+ 320:	88 0f       	add	r24, r24
+ 322:	99 1f       	adc	r25, r25
+ 324:	6a 95       	dec	r22
+ 326:	e2 f7       	brpl	.-8      	; 0x320 <dio_vidConfigChannel+0xb4>
+ 328:	82 2b       	or	r24, r18
+ 32a:	81 bb       	out	0x11, r24	; 17
+ 32c:	08 95       	ret
+ 32e:	21 b3       	in	r18, 0x11	; 17
+ 330:	81 e0       	ldi	r24, 0x01	; 1
+ 332:	90 e0       	ldi	r25, 0x00	; 0
+ 334:	02 c0       	rjmp	.+4      	; 0x33a <dio_vidConfigChannel+0xce>
+ 336:	88 0f       	add	r24, r24
+ 338:	99 1f       	adc	r25, r25
+ 33a:	6a 95       	dec	r22
+ 33c:	e2 f7       	brpl	.-8      	; 0x336 <dio_vidConfigChannel+0xca>
+ 33e:	80 95       	com	r24
+ 340:	82 23       	and	r24, r18
+ 342:	81 bb       	out	0x11, r24	; 17
+ 344:	08 95       	ret
+
+00000346 <dio_vidWriteChannel>:
+ 346:	81 30       	cpi	r24, 0x01	; 1
+ 348:	01 f1       	breq	.+64     	; 0x38a <dio_vidWriteChannel+0x44>
+ 34a:	30 f0       	brcs	.+12     	; 0x358 <dio_vidWriteChannel+0x12>
+ 34c:	82 30       	cpi	r24, 0x02	; 2
+ 34e:	b1 f1       	breq	.+108    	; 0x3bc <dio_vidWriteChannel+0x76>
+ 350:	83 30       	cpi	r24, 0x03	; 3
+ 352:	09 f4       	brne	.+2      	; 0x356 <dio_vidWriteChannel+0x10>
+ 354:	4c c0       	rjmp	.+152    	; 0x3ee <dio_vidWriteChannel+0xa8>
+ 356:	08 95       	ret
+ 358:	41 11       	cpse	r20, r1
+ 35a:	0c c0       	rjmp	.+24     	; 0x374 <dio_vidWriteChannel+0x2e>
+ 35c:	2b b3       	in	r18, 0x1b	; 27
+ 35e:	81 e0       	ldi	r24, 0x01	; 1
+ 360:	90 e0       	ldi	r25, 0x00	; 0
+ 362:	02 c0       	rjmp	.+4      	; 0x368 <dio_vidWriteChannel+0x22>
+ 364:	88 0f       	add	r24, r24
+ 366:	99 1f       	adc	r25, r25
+ 368:	6a 95       	dec	r22
+ 36a:	e2 f7       	brpl	.-8      	; 0x364 <dio_vidWriteChannel+0x1e>
+ 36c:	80 95       	com	r24
+ 36e:	82 23       	and	r24, r18
+ 370:	8b bb       	out	0x1b, r24	; 27
+ 372:	08 95       	ret
+ 374:	2b b3       	in	r18, 0x1b	; 27
+ 376:	81 e0       	ldi	r24, 0x01	; 1
+ 378:	90 e0       	ldi	r25, 0x00	; 0
+ 37a:	02 c0       	rjmp	.+4      	; 0x380 <dio_vidWriteChannel+0x3a>
+ 37c:	88 0f       	add	r24, r24
+ 37e:	99 1f       	adc	r25, r25
+ 380:	6a 95       	dec	r22
+ 382:	e2 f7       	brpl	.-8      	; 0x37c <dio_vidWriteChannel+0x36>
+ 384:	82 2b       	or	r24, r18
+ 386:	8b bb       	out	0x1b, r24	; 27
+ 388:	08 95       	ret
+ 38a:	41 11       	cpse	r20, r1
+ 38c:	0c c0       	rjmp	.+24     	; 0x3a6 <dio_vidWriteChannel+0x60>
+ 38e:	28 b3       	in	r18, 0x18	; 24
+ 390:	81 e0       	ldi	r24, 0x01	; 1
+ 392:	90 e0       	ldi	r25, 0x00	; 0
+ 394:	02 c0       	rjmp	.+4      	; 0x39a <dio_vidWriteChannel+0x54>
+ 396:	88 0f       	add	r24, r24
+ 398:	99 1f       	adc	r25, r25
+ 39a:	6a 95       	dec	r22
+ 39c:	e2 f7       	brpl	.-8      	; 0x396 <dio_vidWriteChannel+0x50>
+ 39e:	80 95       	com	r24
+ 3a0:	82 23       	and	r24, r18
+ 3a2:	88 bb       	out	0x18, r24	; 24
+ 3a4:	08 95       	ret
+ 3a6:	28 b3       	in	r18, 0x18	; 24
+ 3a8:	81 e0       	ldi	r24, 0x01	; 1
+ 3aa:	90 e0       	ldi	r25, 0x00	; 0
+ 3ac:	02 c0       	rjmp	.+4      	; 0x3b2 <dio_vidWriteChannel+0x6c>
+ 3ae:	88 0f       	add	r24, r24
+ 3b0:	99 1f       	adc	r25, r25
+ 3b2:	6a 95       	dec	r22
+ 3b4:	e2 f7       	brpl	.-8      	; 0x3ae <dio_vidWriteChannel+0x68>
+ 3b6:	82 2b       	or	r24, r18
+ 3b8:	88 bb       	out	0x18, r24	; 24
+ 3ba:	08 95       	ret
+ 3bc:	41 11       	cpse	r20, r1
+ 3be:	0c c0       	rjmp	.+24     	; 0x3d8 <dio_vidWriteChannel+0x92>
+ 3c0:	25 b3       	in	r18, 0x15	; 21
+ 3c2:	81 e0       	ldi	r24, 0x01	; 1
+ 3c4:	90 e0       	ldi	r25, 0x00	; 0
+ 3c6:	02 c0       	rjmp	.+4      	; 0x3cc <dio_vidWriteChannel+0x86>
+ 3c8:	88 0f       	add	r24, r24
+ 3ca:	99 1f       	adc	r25, r25
+ 3cc:	6a 95       	dec	r22
+ 3ce:	e2 f7       	brpl	.-8      	; 0x3c8 <dio_vidWriteChannel+0x82>
+ 3d0:	80 95       	com	r24
+ 3d2:	82 23       	and	r24, r18
+ 3d4:	85 bb       	out	0x15, r24	; 21
+ 3d6:	08 95       	ret
+ 3d8:	25 b3       	in	r18, 0x15	; 21
+ 3da:	81 e0       	ldi	r24, 0x01	; 1
+ 3dc:	90 e0       	ldi	r25, 0x00	; 0
+ 3de:	02 c0       	rjmp	.+4      	; 0x3e4 <dio_vidWriteChannel+0x9e>
+ 3e0:	88 0f       	add	r24, r24
+ 3e2:	99 1f       	adc	r25, r25
+ 3e4:	6a 95       	dec	r22
+ 3e6:	e2 f7       	brpl	.-8      	; 0x3e0 <dio_vidWriteChannel+0x9a>
+ 3e8:	82 2b       	or	r24, r18
+ 3ea:	85 bb       	out	0x15, r24	; 21
+ 3ec:	08 95       	ret
+ 3ee:	41 11       	cpse	r20, r1
+ 3f0:	0c c0       	rjmp	.+24     	; 0x40a <__EEPROM_REGION_LENGTH__+0xa>
+ 3f2:	22 b3       	in	r18, 0x12	; 18
+ 3f4:	81 e0       	ldi	r24, 0x01	; 1
+ 3f6:	90 e0       	ldi	r25, 0x00	; 0
+ 3f8:	02 c0       	rjmp	.+4      	; 0x3fe <dio_vidWriteChannel+0xb8>
+ 3fa:	88 0f       	add	r24, r24
+ 3fc:	99 1f       	adc	r25, r25
+ 3fe:	6a 95       	dec	r22
+ 400:	e2 f7       	brpl	.-8      	; 0x3fa <dio_vidWriteChannel+0xb4>
+ 402:	80 95       	com	r24
+ 404:	82 23       	and	r24, r18
+ 406:	82 bb       	out	0x12, r24	; 18
+ 408:	08 95       	ret
+ 40a:	22 b3       	in	r18, 0x12	; 18
+ 40c:	81 e0       	ldi	r24, 0x01	; 1
+ 40e:	90 e0       	ldi	r25, 0x00	; 0
+ 410:	02 c0       	rjmp	.+4      	; 0x416 <__EEPROM_REGION_LENGTH__+0x16>
+ 412:	88 0f       	add	r24, r24
+ 414:	99 1f       	adc	r25, r25
+ 416:	6a 95       	dec	r22
+ 418:	e2 f7       	brpl	.-8      	; 0x412 <__EEPROM_REGION_LENGTH__+0x12>
+ 41a:	82 2b       	or	r24, r18
+ 41c:	82 bb       	out	0x12, r24	; 18
+ 41e:	08 95       	ret
+
+00000420 <dio_dioLevelReadChannel>:
+* \Return value:   : loc_pinRead   -> IO channel level                           
+*******************************************************************************/
+dio_level_t dio_dioLevelReadChannel(dio_portId_t port, dio_channelId_t channel)
+{
+	dio_level_t loc_pinRead = STD_LOW;
+	switch (port)
+ 420:	81 30       	cpi	r24, 0x01	; 1
+ 422:	79 f0       	breq	.+30     	; 0x442 <dio_dioLevelReadChannel+0x22>
+ 424:	28 f0       	brcs	.+10     	; 0x430 <dio_dioLevelReadChannel+0x10>
+ 426:	82 30       	cpi	r24, 0x02	; 2
+ 428:	a9 f0       	breq	.+42     	; 0x454 <dio_dioLevelReadChannel+0x34>
+ 42a:	83 30       	cpi	r24, 0x03	; 3
+ 42c:	e1 f0       	breq	.+56     	; 0x466 <dio_dioLevelReadChannel+0x46>
+ 42e:	24 c0       	rjmp	.+72     	; 0x478 <dio_dioLevelReadChannel+0x58>
+	{
+	 case DIO_PORTA:
+		loc_pinRead = CHECK_BIT(DIO_PINA_REG, channel);
+ 430:	89 b3       	in	r24, 0x19	; 25
+ 432:	90 e0       	ldi	r25, 0x00	; 0
+ 434:	02 c0       	rjmp	.+4      	; 0x43a <dio_dioLevelReadChannel+0x1a>
+ 436:	95 95       	asr	r25
+ 438:	87 95       	ror	r24
+ 43a:	6a 95       	dec	r22
+ 43c:	e2 f7       	brpl	.-8      	; 0x436 <dio_dioLevelReadChannel+0x16>
+ 43e:	81 70       	andi	r24, 0x01	; 1
+		break;
+ 440:	08 95       	ret
+
+	 case DIO_PORTB:
+		loc_pinRead = CHECK_BIT(DIO_PINB_REG, channel);
+ 442:	86 b3       	in	r24, 0x16	; 22
+ 444:	90 e0       	ldi	r25, 0x00	; 0
+ 446:	02 c0       	rjmp	.+4      	; 0x44c <dio_dioLevelReadChannel+0x2c>
+ 448:	95 95       	asr	r25
+ 44a:	87 95       	ror	r24
+ 44c:	6a 95       	dec	r22
+ 44e:	e2 f7       	brpl	.-8      	; 0x448 <dio_dioLevelReadChannel+0x28>
+ 450:	81 70       	andi	r24, 0x01	; 1
+		break;
+ 452:	08 95       	ret
+
+	 case DIO_PORTC:
+		loc_pinRead = CHECK_BIT(DIO_PINC_REG, channel);
+ 454:	83 b3       	in	r24, 0x13	; 19
+ 456:	90 e0       	ldi	r25, 0x00	; 0
+ 458:	02 c0       	rjmp	.+4      	; 0x45e <dio_dioLevelReadChannel+0x3e>
+ 45a:	95 95       	asr	r25
+ 45c:	87 95       	ror	r24
+ 45e:	6a 95       	dec	r22
+ 460:	e2 f7       	brpl	.-8      	; 0x45a <dio_dioLevelReadChannel+0x3a>
+ 462:	81 70       	andi	r24, 0x01	; 1
+		break;
+ 464:	08 95       	ret
+
+	 case DIO_PORTD:
+		loc_pinRead = CHECK_BIT(DIO_PIND_REG, channel);
+ 466:	80 b3       	in	r24, 0x10	; 16
+ 468:	90 e0       	ldi	r25, 0x00	; 0
+ 46a:	02 c0       	rjmp	.+4      	; 0x470 <dio_dioLevelReadChannel+0x50>
+ 46c:	95 95       	asr	r25
+ 46e:	87 95       	ror	r24
+ 470:	6a 95       	dec	r22
+ 472:	e2 f7       	brpl	.-8      	; 0x46c <dio_dioLevelReadChannel+0x4c>
+ 474:	81 70       	andi	r24, 0x01	; 1
+		break;
+ 476:	08 95       	ret
+					 channel  -> MC channel ID
+* \Return value:   : loc_pinRead   -> IO channel level                           
+*******************************************************************************/
+dio_level_t dio_dioLevelReadChannel(dio_portId_t port, dio_channelId_t channel)
+{
+	dio_level_t loc_pinRead = STD_LOW;
+ 478:	80 e0       	ldi	r24, 0x00	; 0
+	 case DIO_PORTD:
+		loc_pinRead = CHECK_BIT(DIO_PIND_REG, channel);
+		break;
+    }
+	return loc_pinRead;
+}
+ 47a:	08 95       	ret
+
+0000047c <led_init>:
+* \Parameters (in) : None                                                                            
+* \Return value:   : None                                                                      
+*******************************************************************************/
+void led_init(void)
+{
+	dio_vidConfigChannel(LED_RED_PORT,LED_RED_CHANNEL,OUTPUT);
+ 47c:	41 e0       	ldi	r20, 0x01	; 1
+ 47e:	67 e0       	ldi	r22, 0x07	; 7
+ 480:	81 e0       	ldi	r24, 0x01	; 1
+ 482:	0e 94 36 01 	call	0x26c	; 0x26c <dio_vidConfigChannel>
+	dio_vidConfigChannel(LED_GREEN_PORT,LED_GREEN_CHANNEL,OUTPUT);
+ 486:	41 e0       	ldi	r20, 0x01	; 1
+ 488:	64 e0       	ldi	r22, 0x04	; 4
+ 48a:	80 e0       	ldi	r24, 0x00	; 0
+ 48c:	0e 94 36 01 	call	0x26c	; 0x26c <dio_vidConfigChannel>
+	dio_vidConfigChannel(LED_BLUE_PORT,LED_BLUE_CHANNEL,OUTPUT);
+ 490:	41 e0       	ldi	r20, 0x01	; 1
+ 492:	65 e0       	ldi	r22, 0x05	; 5
+ 494:	80 e0       	ldi	r24, 0x00	; 0
+ 496:	0e 94 36 01 	call	0x26c	; 0x26c <dio_vidConfigChannel>
+	dio_vidConfigChannel(LED_YELLOW_PORT,LED_YELLOW_CHANNEL,OUTPUT);
+ 49a:	41 e0       	ldi	r20, 0x01	; 1
+ 49c:	66 e0       	ldi	r22, 0x06	; 6
+ 49e:	80 e0       	ldi	r24, 0x00	; 0
+ 4a0:	0e 94 36 01 	call	0x26c	; 0x26c <dio_vidConfigChannel>
+
+	dio_vidWriteChannel(LED_RED_PORT,LED_RED_CHANNEL,STD_LOW);
+ 4a4:	40 e0       	ldi	r20, 0x00	; 0
+ 4a6:	67 e0       	ldi	r22, 0x07	; 7
+ 4a8:	81 e0       	ldi	r24, 0x01	; 1
+ 4aa:	0e 94 a3 01 	call	0x346	; 0x346 <dio_vidWriteChannel>
+	dio_vidWriteChannel(LED_GREEN_PORT,LED_GREEN_CHANNEL,STD_LOW);
+ 4ae:	40 e0       	ldi	r20, 0x00	; 0
+ 4b0:	64 e0       	ldi	r22, 0x04	; 4
+ 4b2:	80 e0       	ldi	r24, 0x00	; 0
+ 4b4:	0e 94 a3 01 	call	0x346	; 0x346 <dio_vidWriteChannel>
+	dio_vidWriteChannel(LED_BLUE_PORT,LED_BLUE_CHANNEL,STD_LOW);
+ 4b8:	40 e0       	ldi	r20, 0x00	; 0
+ 4ba:	65 e0       	ldi	r22, 0x05	; 5
+ 4bc:	80 e0       	ldi	r24, 0x00	; 0
+ 4be:	0e 94 a3 01 	call	0x346	; 0x346 <dio_vidWriteChannel>
+	dio_vidWriteChannel(LED_YELLOW_PORT,LED_YELLOW_CHANNEL,STD_LOW);
+ 4c2:	40 e0       	ldi	r20, 0x00	; 0
+ 4c4:	66 e0       	ldi	r22, 0x06	; 6
+ 4c6:	80 e0       	ldi	r24, 0x00	; 0
+ 4c8:	0e 94 a3 01 	call	0x346	; 0x346 <dio_vidWriteChannel>
+ 4cc:	08 95       	ret
+
+000004ce <led_on>:
+* \Parameters (in) : ledId	-> LED id                                                                            
+* \Return value:   : None                                                                      
+*******************************************************************************/
+void led_on(led_id_t ledId)
+{
+	switch(ledId)
+ 4ce:	81 30       	cpi	r24, 0x01	; 1
+ 4d0:	61 f0       	breq	.+24     	; 0x4ea <led_on+0x1c>
+ 4d2:	28 f0       	brcs	.+10     	; 0x4de <led_on+0x10>
+ 4d4:	82 30       	cpi	r24, 0x02	; 2
+ 4d6:	79 f0       	breq	.+30     	; 0x4f6 <led_on+0x28>
+ 4d8:	83 30       	cpi	r24, 0x03	; 3
+ 4da:	99 f0       	breq	.+38     	; 0x502 <led_on+0x34>
+ 4dc:	08 95       	ret
+	{
+		case LED_RED:
+		
+		#if (LED_RED_CONNECTION == SOURCE)
+			dio_vidWriteChannel(LED_RED_PORT,LED_RED_CHANNEL,STD_HIGH);
+ 4de:	41 e0       	ldi	r20, 0x01	; 1
+ 4e0:	67 e0       	ldi	r22, 0x07	; 7
+ 4e2:	81 e0       	ldi	r24, 0x01	; 1
+ 4e4:	0e 94 a3 01 	call	0x346	; 0x346 <dio_vidWriteChannel>
+		#elif (LED_RED_CONNECTION == SINK)
+			dio_vidWriteChannel(LED_RED_PORT,LED_RED_CHANNEL,STD_LOW);
+		#endif		
+		break;
+ 4e8:	08 95       	ret
+		
+		case LED_GREEN:
+		#if (LED_GREEN_CONNECTION == SOURCE)
+			dio_vidWriteChannel(LED_GREEN_PORT,LED_GREEN_CHANNEL,STD_HIGH);
+ 4ea:	41 e0       	ldi	r20, 0x01	; 1
+ 4ec:	64 e0       	ldi	r22, 0x04	; 4
+ 4ee:	80 e0       	ldi	r24, 0x00	; 0
+ 4f0:	0e 94 a3 01 	call	0x346	; 0x346 <dio_vidWriteChannel>
+		#elif (LED_RED_CONNECTION == SINK)
+			dio_vidWriteChannel(LED_GREEN_PORT,LED_GREEN_CHANNEL,STD_LOW);
+		#endif
+		break;
+ 4f4:	08 95       	ret
+		
+		case LED_BLUE:
+		#if (LED_BLUE_CONNECTION == SOURCE)
+			dio_vidWriteChannel(LED_BLUE_PORT,LED_BLUE_CHANNEL,STD_HIGH);
+ 4f6:	41 e0       	ldi	r20, 0x01	; 1
+ 4f8:	65 e0       	ldi	r22, 0x05	; 5
+ 4fa:	80 e0       	ldi	r24, 0x00	; 0
+ 4fc:	0e 94 a3 01 	call	0x346	; 0x346 <dio_vidWriteChannel>
+		#elif (LED_RED_CONNECTION == SINK)
+			dio_vidWriteChannel(LED_BLUE_PORT,LED_BLUE_CHANNEL,STD_LOW);
+		#endif
+		break;
+ 500:	08 95       	ret
+		
+		case LED_YELLOW:
+		#if (LED_YELLOW_CONNECTION == SOURCE)
+			dio_vidWriteChannel(LED_YELLOW_PORT,LED_YELLOW_CHANNEL,STD_HIGH);
+ 502:	41 e0       	ldi	r20, 0x01	; 1
+ 504:	66 e0       	ldi	r22, 0x06	; 6
+ 506:	80 e0       	ldi	r24, 0x00	; 0
+ 508:	0e 94 a3 01 	call	0x346	; 0x346 <dio_vidWriteChannel>
+ 50c:	08 95       	ret
+
+0000050e <led_off>:
+* \Parameters (in) : ledId	-> LED id                                                                            
+* \Return value:   : None                                                                      
+*******************************************************************************/
+void led_off(led_id_t ledId)
+{
+	switch(ledId)
+ 50e:	81 30       	cpi	r24, 0x01	; 1
+ 510:	61 f0       	breq	.+24     	; 0x52a <led_off+0x1c>
+ 512:	28 f0       	brcs	.+10     	; 0x51e <led_off+0x10>
+ 514:	82 30       	cpi	r24, 0x02	; 2
+ 516:	79 f0       	breq	.+30     	; 0x536 <led_off+0x28>
+ 518:	83 30       	cpi	r24, 0x03	; 3
+ 51a:	99 f0       	breq	.+38     	; 0x542 <led_off+0x34>
+ 51c:	08 95       	ret
+	{
+		case LED_RED:
+		
+		#if (LED_RED_CONNECTION == SOURCE)
+			dio_vidWriteChannel(LED_RED_PORT,LED_RED_CHANNEL,STD_LOW);
+ 51e:	40 e0       	ldi	r20, 0x00	; 0
+ 520:	67 e0       	ldi	r22, 0x07	; 7
+ 522:	81 e0       	ldi	r24, 0x01	; 1
+ 524:	0e 94 a3 01 	call	0x346	; 0x346 <dio_vidWriteChannel>
+		#elif (LED_RED_CONNECTION == SINK)
+			dio_vidWriteChannel(LED_RED_PORT,LED_RED_CHANNEL,STD_HIGH);
+		#endif		
+		break;
+ 528:	08 95       	ret
+		
+		case LED_GREEN:
+		#if (LED_GREEN_CONNECTION == SOURCE)
+			dio_vidWriteChannel(LED_GREEN_PORT,LED_GREEN_CHANNEL,STD_LOW);
+ 52a:	40 e0       	ldi	r20, 0x00	; 0
+ 52c:	64 e0       	ldi	r22, 0x04	; 4
+ 52e:	80 e0       	ldi	r24, 0x00	; 0
+ 530:	0e 94 a3 01 	call	0x346	; 0x346 <dio_vidWriteChannel>
+		#elif (LED_RED_CONNECTION == SINK)
+			dio_vidWriteChannel(LED_GREEN_PORT,LED_GREEN_CHANNEL,STD_HIGH);
+		#endif
+		break;
+ 534:	08 95       	ret
+		
+		case LED_BLUE:
+		#if (LED_BLUE_CONNECTION == SOURCE)
+			dio_vidWriteChannel(LED_BLUE_PORT,LED_BLUE_CHANNEL,STD_LOW);
+ 536:	40 e0       	ldi	r20, 0x00	; 0
+ 538:	65 e0       	ldi	r22, 0x05	; 5
+ 53a:	80 e0       	ldi	r24, 0x00	; 0
+ 53c:	0e 94 a3 01 	call	0x346	; 0x346 <dio_vidWriteChannel>
+		#elif (LED_RED_CONNECTION == SINK)
+			dio_vidWriteChannel(LED_BLUE_PORT,LED_BLUE_CHANNEL,STD_HIGH);
+		#endif
+		break;
+ 540:	08 95       	ret
+		
+		case LED_YELLOW:
+		#if (LED_YELLOW_CONNECTION == SOURCE)
+			dio_vidWriteChannel(LED_YELLOW_PORT,LED_YELLOW_CHANNEL,STD_LOW);
+ 542:	40 e0       	ldi	r20, 0x00	; 0
+ 544:	66 e0       	ldi	r22, 0x06	; 6
+ 546:	80 e0       	ldi	r24, 0x00	; 0
+ 548:	0e 94 a3 01 	call	0x346	; 0x346 <dio_vidWriteChannel>
+ 54c:	08 95       	ret
+
+0000054e <main>:
+#include "led.h"
+#include "password.h"
+
+int main(void)
+{
+	button_vidInit();
+ 54e:	0e 94 41 00 	call	0x82	; 0x82 <button_vidInit>
+	buzzer_init();
+ 552:	0e 94 88 00 	call	0x110	; 0x110 <buzzer_init>
+	led_init();
+ 556:	0e 94 3e 02 	call	0x47c	; 0x47c <led_init>
+	password_init();
+ 55a:	0e 94 43 03 	call	0x686	; 0x686 <password_init>
+    while (1) 
+    {
+		led_on(LED_BLUE);
+ 55e:	82 e0       	ldi	r24, 0x02	; 2
+ 560:	0e 94 67 02 	call	0x4ce	; 0x4ce <led_on>
+		led_on(LED_GREEN);
+ 564:	81 e0       	ldi	r24, 0x01	; 1
+ 566:	0e 94 67 02 	call	0x4ce	; 0x4ce <led_on>
+		led_on(LED_RED);
+ 56a:	80 e0       	ldi	r24, 0x00	; 0
+ 56c:	0e 94 67 02 	call	0x4ce	; 0x4ce <led_on>
+		led_on(LED_YELLOW);
+ 570:	83 e0       	ldi	r24, 0x03	; 3
+ 572:	0e 94 67 02 	call	0x4ce	; 0x4ce <led_on>
+ 576:	f3 cf       	rjmp	.-26     	; 0x55e <main+0x10>
+
+00000578 <get_entry>:
+/************************************************************************************************/
+
+
+button_id_t get_entry()
+{
+	if(Button_GetStatus(BUTTON0) == PRESSED)
+ 578:	80 e0       	ldi	r24, 0x00	; 0
+ 57a:	0e 94 56 00 	call	0xac	; 0xac <Button_GetStatus>
+ 57e:	81 30       	cpi	r24, 0x01	; 1
+ 580:	79 f4       	brne	.+30     	; 0x5a0 <get_entry+0x28>
+		{
+			global_counter ++;
+ 582:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 586:	8f 5f       	subi	r24, 0xFF	; 255
+ 588:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+			led_on(LED_YELLOW);
+ 58c:	83 e0       	ldi	r24, 0x03	; 3
+ 58e:	0e 94 67 02 	call	0x4ce	; 0x4ce <led_on>
+			buzzer_entry_tune();
+ 592:	0e 94 22 01 	call	0x244	; 0x244 <buzzer_entry_tune>
+			led_off(LED_YELLOW);
+ 596:	83 e0       	ldi	r24, 0x03	; 3
+ 598:	0e 94 87 02 	call	0x50e	; 0x50e <led_off>
+			return BUTTON0 ;
+ 59c:	80 e0       	ldi	r24, 0x00	; 0
+ 59e:	08 95       	ret
+		}
+	else if(Button_GetStatus(BUTTON1) == PRESSED)
+ 5a0:	81 e0       	ldi	r24, 0x01	; 1
+ 5a2:	0e 94 56 00 	call	0xac	; 0xac <Button_GetStatus>
+ 5a6:	81 30       	cpi	r24, 0x01	; 1
+ 5a8:	79 f4       	brne	.+30     	; 0x5c8 <get_entry+0x50>
+		{
+			global_counter ++;
+ 5aa:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 5ae:	8f 5f       	subi	r24, 0xFF	; 255
+ 5b0:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+			led_on(LED_YELLOW);
+ 5b4:	83 e0       	ldi	r24, 0x03	; 3
+ 5b6:	0e 94 67 02 	call	0x4ce	; 0x4ce <led_on>
+			buzzer_entry_tune();
+ 5ba:	0e 94 22 01 	call	0x244	; 0x244 <buzzer_entry_tune>
+			led_off(LED_YELLOW);
+ 5be:	83 e0       	ldi	r24, 0x03	; 3
+ 5c0:	0e 94 87 02 	call	0x50e	; 0x50e <led_off>
+			return BUTTON1 ;
+ 5c4:	81 e0       	ldi	r24, 0x01	; 1
+ 5c6:	08 95       	ret
+		}
+	else if(Button_GetStatus(BUTTON2) == PRESSED)
+ 5c8:	82 e0       	ldi	r24, 0x02	; 2
+ 5ca:	0e 94 56 00 	call	0xac	; 0xac <Button_GetStatus>
+ 5ce:	81 30       	cpi	r24, 0x01	; 1
+ 5d0:	79 f4       	brne	.+30     	; 0x5f0 <get_entry+0x78>
+		{
+			global_counter ++;
+ 5d2:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 5d6:	8f 5f       	subi	r24, 0xFF	; 255
+ 5d8:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+			led_on(LED_YELLOW);
+ 5dc:	83 e0       	ldi	r24, 0x03	; 3
+ 5de:	0e 94 67 02 	call	0x4ce	; 0x4ce <led_on>
+			buzzer_entry_tune();
+ 5e2:	0e 94 22 01 	call	0x244	; 0x244 <buzzer_entry_tune>
+			led_off(LED_YELLOW);
+ 5e6:	83 e0       	ldi	r24, 0x03	; 3
+ 5e8:	0e 94 87 02 	call	0x50e	; 0x50e <led_off>
+		return BUTTON2 ;
+ 5ec:	82 e0       	ldi	r24, 0x02	; 2
+ 5ee:	08 95       	ret
+		}
+	else if(Button_GetStatus(BUTTON3) == PRESSED)
+ 5f0:	83 e0       	ldi	r24, 0x03	; 3
+ 5f2:	0e 94 56 00 	call	0xac	; 0xac <Button_GetStatus>
+ 5f6:	81 30       	cpi	r24, 0x01	; 1
+ 5f8:	51 f4       	brne	.+20     	; 0x60e <get_entry+0x96>
+		{
+			led_on(LED_BLUE);
+ 5fa:	82 e0       	ldi	r24, 0x02	; 2
+ 5fc:	0e 94 67 02 	call	0x4ce	; 0x4ce <led_on>
+			buzzer_entry_tune();
+ 600:	0e 94 22 01 	call	0x244	; 0x244 <buzzer_entry_tune>
+			led_off(LED_BLUE);
+ 604:	82 e0       	ldi	r24, 0x02	; 2
+ 606:	0e 94 87 02 	call	0x50e	; 0x50e <led_off>
+			return BUTTON3;
+ 60a:	83 e0       	ldi	r24, 0x03	; 3
+ 60c:	08 95       	ret
+		}
+	return -1;
+ 60e:	8f ef       	ldi	r24, 0xFF	; 255
+}
+ 610:	08 95       	ret
+
+00000612 <add_entry>:
+/************************************************************************************************/
+
+
+void add_entry(button_id_t entry,u8 current_entries [MAX_CHARACTERS])
+{
+	switch (entry)
+ 612:	81 30       	cpi	r24, 0x01	; 1
+ 614:	59 f0       	breq	.+22     	; 0x62c <add_entry+0x1a>
+ 616:	18 f0       	brcs	.+6      	; 0x61e <add_entry+0xc>
+ 618:	82 30       	cpi	r24, 0x02	; 2
+ 61a:	81 f0       	breq	.+32     	; 0x63c <add_entry+0x2a>
+ 61c:	08 95       	ret
+	{
+		case BUTTON0:
+			current_entries[global_counter]= BUTTON0_CHAR ;
+ 61e:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 622:	fb 01       	movw	r30, r22
+ 624:	e8 0f       	add	r30, r24
+ 626:	f1 1d       	adc	r31, r1
+ 628:	10 82       	st	Z, r1
+			break ;
+ 62a:	08 95       	ret
+		
+		case BUTTON1:
+			current_entries[global_counter]= BUTTON1_CHAR ;
+ 62c:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 630:	fb 01       	movw	r30, r22
+ 632:	e8 0f       	add	r30, r24
+ 634:	f1 1d       	adc	r31, r1
+ 636:	81 e0       	ldi	r24, 0x01	; 1
+ 638:	80 83       	st	Z, r24
+			break ;
+ 63a:	08 95       	ret
+		
+		case BUTTON2:
+			current_entries[global_counter]= BUTTON2_CHAR ;
+ 63c:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 640:	fb 01       	movw	r30, r22
+ 642:	e8 0f       	add	r30, r24
+ 644:	f1 1d       	adc	r31, r1
+ 646:	82 e0       	ldi	r24, 0x02	; 2
+ 648:	80 83       	st	Z, r24
+ 64a:	08 95       	ret
+
+0000064c <check_password>:
+/************************************************************************************************/
+/************************************************************************************************/
+
+
+boolean check_password(const u8 STD_PASSWORD [CURRENT_PASSWORD_SIZE] ,u8 current_entries [MAX_CHARACTERS])
+{
+ 64c:	dc 01       	movw	r26, r24
+	if(global_counter+1 != CURRENT_PASSWORD_SIZE)
+ 64e:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 652:	85 30       	cpi	r24, 0x05	; 5
+ 654:	a1 f4       	brne	.+40     	; 0x67e <check_password+0x32>
+ 656:	20 e0       	ldi	r18, 0x00	; 0
+ 658:	30 e0       	ldi	r19, 0x00	; 0
+ 65a:	0c c0       	rjmp	.+24     	; 0x674 <check_password+0x28>
+	}
+	else
+	{
+		for(int i=0;i<CURRENT_PASSWORD_SIZE ;i++)
+		{
+			if(STD_PASSWORD[i] != current_entries[i])
+ 65c:	fd 01       	movw	r30, r26
+ 65e:	e2 0f       	add	r30, r18
+ 660:	f3 1f       	adc	r31, r19
+ 662:	40 81       	ld	r20, Z
+ 664:	fb 01       	movw	r30, r22
+ 666:	e2 0f       	add	r30, r18
+ 668:	f3 1f       	adc	r31, r19
+ 66a:	90 81       	ld	r25, Z
+ 66c:	49 13       	cpse	r20, r25
+ 66e:	09 c0       	rjmp	.+18     	; 0x682 <check_password+0x36>
+	{
+		return FALSE ;
+	}
+	else
+	{
+		for(int i=0;i<CURRENT_PASSWORD_SIZE ;i++)
+ 670:	2f 5f       	subi	r18, 0xFF	; 255
+ 672:	3f 4f       	sbci	r19, 0xFF	; 255
+ 674:	26 30       	cpi	r18, 0x06	; 6
+ 676:	31 05       	cpc	r19, r1
+ 678:	8c f3       	brlt	.-30     	; 0x65c <check_password+0x10>
+			{
+				return FALSE;
+			}
+		}
+	}
+	return TRUE;
+ 67a:	81 e0       	ldi	r24, 0x01	; 1
+ 67c:	08 95       	ret
+
+boolean check_password(const u8 STD_PASSWORD [CURRENT_PASSWORD_SIZE] ,u8 current_entries [MAX_CHARACTERS])
+{
+	if(global_counter+1 != CURRENT_PASSWORD_SIZE)
+	{
+		return FALSE ;
+ 67e:	80 e0       	ldi	r24, 0x00	; 0
+ 680:	08 95       	ret
+	{
+		for(int i=0;i<CURRENT_PASSWORD_SIZE ;i++)
+		{
+			if(STD_PASSWORD[i] != current_entries[i])
+			{
+				return FALSE;
+ 682:	80 e0       	ldi	r24, 0x00	; 0
+			}
+		}
+	}
+	return TRUE;
+}
+ 684:	08 95       	ret
+
+00000686 <password_init>:
+/************************************************************************************************/
+/************************************************************************************************/
+
+
+void password_init()
+{
+ 686:	0f 93       	push	r16
+ 688:	1f 93       	push	r17
+ 68a:	cf 93       	push	r28
+ 68c:	df 93       	push	r29
+ 68e:	cd b7       	in	r28, 0x3d	; 61
+ 690:	de b7       	in	r29, 0x3e	; 62
+ 692:	60 97       	sbiw	r28, 0x10	; 16
+ 694:	0f b6       	in	r0, 0x3f	; 63
+ 696:	f8 94       	cli
+ 698:	de bf       	out	0x3e, r29	; 62
+ 69a:	0f be       	out	0x3f, r0	; 63
+ 69c:	cd bf       	out	0x3d, r28	; 61
+	const u8 STD_PASSWORD [CURRENT_PASSWORD_SIZE] = CURRENT_PASSWORD;
+ 69e:	86 e0       	ldi	r24, 0x06	; 6
+ 6a0:	e1 e6       	ldi	r30, 0x61	; 97
+ 6a2:	f0 e0       	ldi	r31, 0x00	; 0
+ 6a4:	de 01       	movw	r26, r28
+ 6a6:	11 96       	adiw	r26, 0x01	; 1
+ 6a8:	01 90       	ld	r0, Z+
+ 6aa:	0d 92       	st	X+, r0
+ 6ac:	8a 95       	dec	r24
+ 6ae:	e1 f7       	brne	.-8      	; 0x6a8 <password_init+0x22>
+	boolean press_flag = FALSE;
+	boolean global_flag = FALSE ;
+ 6b0:	00 e0       	ldi	r16, 0x00	; 0
+
+
+void password_init()
+{
+	const u8 STD_PASSWORD [CURRENT_PASSWORD_SIZE] = CURRENT_PASSWORD;
+	boolean press_flag = FALSE;
+ 6b2:	10 e0       	ldi	r17, 0x00	; 0
+	boolean global_flag = FALSE ;
+	while (global_flag ==FALSE)
+ 6b4:	48 c0       	rjmp	.+144    	; 0x746 <password_init+0xc0>
+	{
+		u8 current_entries [MAX_CHARACTERS];
+		while (press_flag ==FALSE)
+		{
+			button_id_t entry = get_entry();
+ 6b6:	0e 94 bc 02 	call	0x578	; 0x578 <get_entry>
+			if(global_counter+1 == MAX_CHARACTERS)
+ 6ba:	90 91 60 00 	lds	r25, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 6be:	99 30       	cpi	r25, 0x09	; 9
+ 6c0:	b9 f4       	brne	.+46     	; 0x6f0 <password_init+0x6a>
+				{
+					led_on(LED_RED);
+ 6c2:	80 e0       	ldi	r24, 0x00	; 0
+ 6c4:	0e 94 67 02 	call	0x4ce	; 0x4ce <led_on>
+					buzzer_entry_tune();
+ 6c8:	0e 94 22 01 	call	0x244	; 0x244 <buzzer_entry_tune>
+					buzzer_entry_tune();
+ 6cc:	0e 94 22 01 	call	0x244	; 0x244 <buzzer_entry_tune>
+					buzzer_entry_tune();
+ 6d0:	0e 94 22 01 	call	0x244	; 0x244 <buzzer_entry_tune>
+					buzzer_entry_tune();
+ 6d4:	0e 94 22 01 	call	0x244	; 0x244 <buzzer_entry_tune>
+					led_off(LED_RED);
+ 6d8:	80 e0       	ldi	r24, 0x00	; 0
+ 6da:	0e 94 87 02 	call	0x50e	; 0x50e <led_off>
+					led_on(LED_BLUE);
+ 6de:	82 e0       	ldi	r24, 0x02	; 2
+ 6e0:	0e 94 67 02 	call	0x4ce	; 0x4ce <led_on>
+					buzzer_entry_tune();
+ 6e4:	0e 94 22 01 	call	0x244	; 0x244 <buzzer_entry_tune>
+					led_off(LED_BLUE);
+ 6e8:	82 e0       	ldi	r24, 0x02	; 2
+ 6ea:	0e 94 87 02 	call	0x50e	; 0x50e <led_off>
+					break;
+ 6ee:	0d c0       	rjmp	.+26     	; 0x70a <password_init+0x84>
+				}
+			if (entry ==BUTTON0 || entry ==BUTTON1 || entry ==BUTTON2)
+ 6f0:	83 30       	cpi	r24, 0x03	; 3
+ 6f2:	30 f4       	brcc	.+12     	; 0x700 <password_init+0x7a>
+			add_entry(entry,current_entries);
+ 6f4:	be 01       	movw	r22, r28
+ 6f6:	69 5f       	subi	r22, 0xF9	; 249
+ 6f8:	7f 4f       	sbci	r23, 0xFF	; 255
+ 6fa:	0e 94 09 03 	call	0x612	; 0x612 <add_entry>
+ 6fe:	03 c0       	rjmp	.+6      	; 0x706 <password_init+0x80>
+			else if(entry == BUTTON3)
+ 700:	83 30       	cpi	r24, 0x03	; 3
+ 702:	09 f4       	brne	.+2      	; 0x706 <password_init+0x80>
+			{
+				press_flag = TRUE;
+ 704:	11 e0       	ldi	r17, 0x01	; 1
+	boolean press_flag = FALSE;
+	boolean global_flag = FALSE ;
+	while (global_flag ==FALSE)
+	{
+		u8 current_entries [MAX_CHARACTERS];
+		while (press_flag ==FALSE)
+ 706:	11 23       	and	r17, r17
+ 708:	b1 f2       	breq	.-84     	; 0x6b6 <password_init+0x30>
+			{
+				press_flag = TRUE;
+			}
+		}
+		
+		if(check_password(STD_PASSWORD,current_entries) == TRUE)
+ 70a:	be 01       	movw	r22, r28
+ 70c:	69 5f       	subi	r22, 0xF9	; 249
+ 70e:	7f 4f       	sbci	r23, 0xFF	; 255
+ 710:	ce 01       	movw	r24, r28
+ 712:	01 96       	adiw	r24, 0x01	; 1
+ 714:	0e 94 26 03 	call	0x64c	; 0x64c <check_password>
+ 718:	81 30       	cpi	r24, 0x01	; 1
+ 71a:	49 f4       	brne	.+18     	; 0x72e <password_init+0xa8>
+		{
+			global_flag = TRUE;
+			led_on(LED_GREEN);
+ 71c:	0e 94 67 02 	call	0x4ce	; 0x4ce <led_on>
+			buzzer_correct_password_tune();
+ 720:	0e 94 93 00 	call	0x126	; 0x126 <buzzer_correct_password_tune>
+			led_off(LED_GREEN);
+ 724:	81 e0       	ldi	r24, 0x01	; 1
+ 726:	0e 94 87 02 	call	0x50e	; 0x50e <led_off>
+			}
+		}
+		
+		if(check_password(STD_PASSWORD,current_entries) == TRUE)
+		{
+			global_flag = TRUE;
+ 72a:	01 e0       	ldi	r16, 0x01	; 1
+ 72c:	09 c0       	rjmp	.+18     	; 0x740 <password_init+0xba>
+			buzzer_correct_password_tune();
+			led_off(LED_GREEN);
+		}
+		else
+		{
+			led_on(LED_RED);
+ 72e:	80 e0       	ldi	r24, 0x00	; 0
+ 730:	0e 94 67 02 	call	0x4ce	; 0x4ce <led_on>
+			buzzer_wrong_password_tune();
+ 734:	0e 94 f1 00 	call	0x1e2	; 0x1e2 <buzzer_wrong_password_tune>
+			led_off(LED_RED);
+ 738:	80 e0       	ldi	r24, 0x00	; 0
+ 73a:	0e 94 87 02 	call	0x50e	; 0x50e <led_off>
+			press_flag = FALSE;
+ 73e:	10 e0       	ldi	r17, 0x00	; 0
+		}
+		global_counter =-1;
+ 740:	8f ef       	ldi	r24, 0xFF	; 255
+ 742:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+void password_init()
+{
+	const u8 STD_PASSWORD [CURRENT_PASSWORD_SIZE] = CURRENT_PASSWORD;
+	boolean press_flag = FALSE;
+	boolean global_flag = FALSE ;
+	while (global_flag ==FALSE)
+ 746:	00 23       	and	r16, r16
+ 748:	f1 f2       	breq	.-68     	; 0x706 <password_init+0x80>
+			press_flag = FALSE;
+		}
+		global_counter =-1;
+	}
+	
+}
+ 74a:	60 96       	adiw	r28, 0x10	; 16
+ 74c:	0f b6       	in	r0, 0x3f	; 63
+ 74e:	f8 94       	cli
+ 750:	de bf       	out	0x3e, r29	; 62
+ 752:	0f be       	out	0x3f, r0	; 63
+ 754:	cd bf       	out	0x3d, r28	; 61
+ 756:	df 91       	pop	r29
+ 758:	cf 91       	pop	r28
+ 75a:	1f 91       	pop	r17
+ 75c:	0f 91       	pop	r16
+ 75e:	08 95       	ret
+
+00000760 <_exit>:
+ 760:	f8 94       	cli
+
+00000762 <__stop_program>:
+ 762:	ff cf       	rjmp	.-2      	; 0x762 <__stop_program>
