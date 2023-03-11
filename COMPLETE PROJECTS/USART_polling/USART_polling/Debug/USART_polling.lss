@@ -1,0 +1,160 @@
+
+USART_polling.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000000b8  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  0000010c  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  0000010c  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  0000013c  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000050  00000000  00000000  00000178  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   0000070a  00000000  00000000  000001c8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000005df  00000000  00000000  000008d2  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   0000023c  00000000  00000000  00000eb1  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000068  00000000  00000000  000010f0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000357  00000000  00000000  00001158  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000026  00000000  00000000  000014af  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000030  00000000  00000000  000014d5  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   8:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  10:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  14:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  18:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  1c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  20:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  24:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  28:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  2c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  30:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  34:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  38:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  3c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  40:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  44:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  48:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  4c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  50:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+  60:	0e 94 36 00 	call	0x6c	; 0x6c <main>
+  64:	0c 94 5a 00 	jmp	0xb4	; 0xb4 <_exit>
+
+00000068 <__bad_interrupt>:
+  68:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000006c <main>:
+#include <avr/io.h>
+#include "uart.h"
+
+int main(void)
+{
+	UART_Init(UART_BAUDRATE_9600);
+  6c:	87 e6       	ldi	r24, 0x67	; 103
+  6e:	90 e0       	ldi	r25, 0x00	; 0
+  70:	0e 94 40 00 	call	0x80	; 0x80 <UART_Init>
+    /* Replace with your application code */
+    while (1) 
+    {
+		UART_TransmitChr(1);
+  74:	81 e0       	ldi	r24, 0x01	; 1
+  76:	0e 94 52 00 	call	0xa4	; 0xa4 <UART_TransmitChr>
+		u8 x = UART_ReceiveChr();
+  7a:	0e 94 56 00 	call	0xac	; 0xac <UART_ReceiveChr>
+  7e:	fa cf       	rjmp	.-12     	; 0x74 <main+0x8>
+
+00000080 <UART_Init>:
+* \Return value:   : None                                   
+*******************************************************************************/
+void UART_Init(u16 baudRate)
+{
+	/* Set baud rate */
+	UART_UBRRL_REG = (u8)baudRate;
+  80:	89 b9       	out	0x09, r24	; 9
+	UART_UBRRH_REG = (u8)(baudRate>>8);
+  82:	90 bd       	out	0x20, r25	; 32
+
+	/* Enable receiver and transmitter */
+	SET_BIT(UART_UCSRB_REG,RXEN_BIT_NO);  /* Enable Receiver*/
+  84:	8a b1       	in	r24, 0x0a	; 10
+  86:	80 61       	ori	r24, 0x10	; 16
+  88:	8a b9       	out	0x0a, r24	; 10
+	SET_BIT(UART_UCSRB_REG,TXEN_BIT_NO);  /* Enable Transmitter */
+  8a:	8a b1       	in	r24, 0x0a	; 10
+  8c:	88 60       	ori	r24, 0x08	; 8
+  8e:	8a b9       	out	0x0a, r24	; 10
+	/* Set frame format: 8data, 1stop bit, Even Parity */
+	UART_UCSRC_REG |= (1 << URSEL_BIT_NO) | UART_8_BIT_DATA | UART_EVEN_PARITY;
+  90:	80 b5       	in	r24, 0x20	; 32
+  92:	86 6a       	ori	r24, 0xA6	; 166
+  94:	80 bd       	out	0x20, r24	; 32
+
+	SET_BIT(UART_UCSRB_REG,7); /*	Enable Rx Complete Interrupt	*/
+  96:	8a b1       	in	r24, 0x0a	; 10
+  98:	80 68       	ori	r24, 0x80	; 128
+  9a:	8a b9       	out	0x0a, r24	; 10
+	SET_BIT(UART_UCSRB_REG,6); /*	Enable Tx Complete Interrupt	*/
+  9c:	8a b1       	in	r24, 0x0a	; 10
+  9e:	80 64       	ori	r24, 0x40	; 64
+  a0:	8a b9       	out	0x0a, r24	; 10
+  a2:	08 95       	ret
+
+000000a4 <UART_TransmitChr>:
+* \Parameters (in) : data   data byte                                                                    
+* \Return value:   : None                                   
+*******************************************************************************/
+void UART_TransmitChr(u8 data)
+{
+	while(! (UART_UCSRA_REG & (1<<UDRE_BIT_NO)));
+  a4:	5d 9b       	sbis	0x0b, 5	; 11
+  a6:	fe cf       	rjmp	.-4      	; 0xa4 <UART_TransmitChr>
+	{
+		
+	}
+	/* Put data into buffer*/
+	UART_UDR_REG = data;
+  a8:	8c b9       	out	0x0c, r24	; 12
+  aa:	08 95       	ret
+
+000000ac <UART_ReceiveChr>:
+* \Parameters (in) : None                                                                    
+* \Return value:   : u8     received data byte                                   
+*******************************************************************************/
+u8 UART_ReceiveChr(void)
+{
+	while (UART_UCSRA_REG & (1<<RXC_BIT_NO));
+  ac:	5f 99       	sbic	0x0b, 7	; 11
+  ae:	fe cf       	rjmp	.-4      	; 0xac <UART_ReceiveChr>
+	return UART_UDR_REG;
+  b0:	8c b1       	in	r24, 0x0c	; 12
+}
+  b2:	08 95       	ret
+
+000000b4 <_exit>:
+  b4:	f8 94       	cli
+
+000000b6 <__stop_program>:
+  b6:	ff cf       	rjmp	.-2      	; 0xb6 <__stop_program>
